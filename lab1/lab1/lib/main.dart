@@ -2,6 +2,9 @@
 Joshua Trinh
 CECS 453 - Lab 1
 6/1/2026
+
+Github Link:
+https://github.com/joshuatrinh29/cecs453
 */
 
 import 'package:flutter/material.dart';
@@ -39,7 +42,6 @@ class MyApp extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center, // centers @ x-axis
             crossAxisAlignment: CrossAxisAlignment.center, // centers @ y-axis
-
 
             children: [
 
@@ -80,7 +82,7 @@ class MyApp extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
 
-                        // handle icons
+                        // icons
                         children: [
                           Icon(
                             handleIcons[i],
@@ -90,7 +92,7 @@ class MyApp extends StatelessWidget {
 
                           SizedBox(width: 8), // space between each handle
 
-                          // handle text
+                          // text
                           Text(
                             handles[i],
                             style: TextStyle(
