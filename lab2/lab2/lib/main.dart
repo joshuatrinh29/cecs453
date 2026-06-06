@@ -9,7 +9,6 @@ https://github.com/joshuatrinh29/cecs453
 
 import 'package:flutter/material.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -21,73 +20,133 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: const ButtonHandlerScreen(),
-      );
-    }
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class ButtonHandlerScreen extends StatefulWidget {
+  const ButtonHandlerScreen({super.key});
+
+  @override
+  State<ButtonHandlerScreen> createState() => _ButtonHandlerScreenState();
+}
+
+class _ButtonHandlerScreenState extends State<ButtonHandlerScreen> {
+  // State variable to track current painting index
+  int _currentIndex = 0;
+  
+  // Sample paintings data (add your actual asset paths)
+  final List<Map<String, String>> paintings = [
+    {
+      "image": "assets/apple_CindyLe.jpg", 
+      "title": "worm :3",
+      "artist": "Cindy Le",
+      "year": "2026",
+    },
+    {
+      "image": "assets/loaf_JoanRevolt.webp",
+      "title": "Delicious Loaf",
+      "artist": "Joan Revolt",
+      "year": "2026",
+    },
+    {
+      "image": "assets/peanutButter_DaisyTran.png",
+      "title": "Peanut Butter",
+      "artist": "Daisy Tran",
+      "year": "2026",
+    },
+  ];
+
+  // Event handler methods
+  void _nextPainting() {
+    setState(() {
+      // brings up the next drawing/painting
+      // % accounts for when the user is hitting next many times
+      _currentIndex = (_currentIndex + 1) % paintings.length;
+    });
   }
 
-  class ButtonHandlerScreen extends StatefulWidget{
-    const ButtonHandlerScreen({super.key});
-
-    @override
-    State<ButtonHandlerScreen> createState() => _ButtonHandlerScreenState();
+  void _previousPainting() {
+    setState(() {
+      _currentIndex = (_currentIndex - 1 + paintings.length) % paintings.length;
+    });
   }
   
-  class _ButtonHandlerScreenState extends State<ButtonHandlerScreen> {
-    
-    // 2. Define a state variable
-    int _counter = 0;
-    
-    final List<Map<String, String>> paintings = [
-      {
-        "image" : "assets/",
-        "title" : "title_name",
-        "artist" : "artist_name",
-        "year" : "year",
-      },
-    ];
+  @override
+  Widget build(BuildContext context) {
 
-    // 3. Implement the event handler method
-    void _incrementCounter() {
-      // Use setState() to update the state and rebuild the UI 
-      //increments the counter, then % checks for an overflow when 
-      // a user presses forward a bunch of times
-      setState(() { 
-        _counter = (_counter + 1) % paintings.length;
-      });
-    }
-
-    void _decrementCounter() {
-      setState(() { 
-        _counter = (_counter - 1) % paintings.length;
-      });
-    }
+    // get the current painting, usually the first painting in the index
+    final currentPainting = paintings[_currentIndex];
     
-    @override
-    Widget build(BuildContext context) {
-      return Scaffold(
+    return Scaffold(
       appBar: AppBar(
       ),
-      
       body: Center(
-        child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              _displayText,
-              style: const TextStyle(fontSize: 18),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          const SizedBox(height: 20),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Artwork Image
+              Container(
+                width: 300,
+                height: 300,
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Image.asset(
+                  currentPainting["image"]!,
+                  fit: BoxFit.cover,
+                ),
+              ),
 
-          ElevatedButton(
-            // Assign the handler method to the onPressed callback 
-            onPressed: _incrementCounter,
-            child: const Text('Next'),
-            ),
-          ],
+              const SizedBox(height: 20),
+
+              // Artwork Information
+              Text(
+                currentPainting["title"]!,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+
+              const SizedBox(height: 8),
+
+              Text(
+                "${currentPainting["artist"]} (${currentPainting["year"]})",
+                style: const TextStyle(fontSize: 18, color: Colors.grey),
+                textAlign: TextAlign.center,
+              ),
+
+              const SizedBox(height: 20),
+
+              // Navigation Buttons
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: _previousPainting,
+                    label: const Text("Previous"),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(120, 40),
+                    ),
+                  ),
+                  ElevatedButton.icon(
+                    onPressed: _nextPainting,
+                    label: const Text("Next"),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size(120, 40),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
