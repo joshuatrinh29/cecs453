@@ -13,13 +13,40 @@ class Post {
 
 List<Post> posts = [
   Post(
-  contentText: 'Enjoying the beautiful sunset at the beach!',
+  contentText: ' Asking for help is a sign of self-respect and self-awareness.',
   contentImageUrl: 'https://picsum.photos/250?image=51',
   ),
+
   Post(
-  contentText: 'Just got back from a fun vacation in the mountains.',
+  contentText: 'Every decision I make is supported by my whole and inarguable experience.',
   contentImageUrl: 'https://picsum.photos/250?image=52',
   ),
+
+  Post(
+    contentText: 'I am more than my circumstances dictate.',
+    contentImageUrl: 'https://picsum.photos/250?image=53',
+  ),
+
+  Post(
+    contentText: 'I see now that the circumstances of one’s birth are irrelevant. It is what you do with the gift of life that determines who you are.',
+    contentImageUrl: 'https://picsum.photos/250?image=54',
+  ),
+
+  Post(
+    contentText: 'I can control how I respond to things that are confronting.',
+    contentImageUrl: 'https://picsum.photos/250?image=55',
+  ),
+
+  Post(
+    contentText: 'I do not have to linger in dark places; there is help for me here.',
+    contentImageUrl: 'https://picsum.photos/250?image=56',
+  ),
+
+  Post(
+    contentText: 'I grow towards my interests, like a plant reaching for the sun.',
+    contentImageUrl: 'https://picsum.photos/250?image=57',
+  ),
+
 ];
 
 
@@ -32,9 +59,8 @@ class MyApp extends StatelessWidget {
 
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
-      appBar: AppBar(title: const Text('Social Post')),
-      
       body: ListView.builder(
         itemCount: posts.length,
         itemBuilder: (BuildContext context, int index) {
@@ -44,9 +70,9 @@ class MyApp extends StatelessWidget {
             children: [
             Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(posts[index].contentText),
-            ),
-            Image.network(posts[index].contentImageUrl),
+            child: Image.network(posts[index].contentImageUrl),
+            ), 
+            Text(posts[index].contentText),
             ],
             ),
           );
