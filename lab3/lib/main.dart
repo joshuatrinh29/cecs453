@@ -1,3 +1,13 @@
+/*
+Joshua Trinh
+CECS 453 - Lab 3
+6/8/2026
+
+
+Github Link:
+https://github.com/joshuatrinh29/cecs453
+*/
+
 import 'package:flutter/material.dart';
 
 class Post {
